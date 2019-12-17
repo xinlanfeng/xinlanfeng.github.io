@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>http系列01</title>
+      <link href="/2019/12/17/http%E7%B3%BB%E5%88%9701/"/>
+      <url>/2019/12/17/http%E7%B3%BB%E5%88%9701/</url>
+      
+        <content type="html"><![CDATA[<h3 id="1-浏览器背后的故事"><a href="#1-浏览器背后的故事" class="headerlink" title="1. 浏览器背后的故事"></a>1. 浏览器背后的故事</h3><p>​    用户在浏览器中输入URL地址，浏览器根据URL向 DNS（域名系统）服务器发送请求，DNS服务器根据域名查询到对应的IP地址并返回给浏览器，浏览器根据得到的IP地址向web服务器发起请求，请求相应的数据，web服务器返回给浏览器所请求的数据(如：HTML/CSS/JS 等)，浏览器将这些数据进行渲染后，显示给用户看。</p><p>​    过程如下图所示：</p><img src="/2019/12/17/http%E7%B3%BB%E5%88%9701/brower%E6%B8%B2%E6%9F%93.png" class><hr><h3 id="2-HTTP协议"><a href="#2-HTTP协议" class="headerlink" title="2. HTTP协议"></a>2. HTTP协议</h3><ul><li>HTTP协议的概念<ul><li>超文本传输协议（HTTP）是一种<strong>通信协议</strong>，它允许将超文本标记语言（HTML）文档从Web服务器传送到客户端的浏览器</li><li>HTTP是一个属于<strong>应用层的面向对象的协议</strong>，由于其简捷、快速的方式，适用于分布式超媒体信息系统。它于1990年提出，经过几年的使用与发展，得到不断地完善和扩展</li></ul></li><li>Web与HTTP<ul><li>Web是一种基于超文本和HTTP的，全球性的，动态交互的，跨平台的分布式<strong>图形信息系统</strong></li><li>是建立在Internet上的一种<strong>网络服务</strong>，为浏览者在Internet上查找和浏览信息提供了图形化的、易于访问的直观界面，其中的文档及超链接将Internet上的信息节点组织成一个互为关联的网状结构</li></ul></li></ul><hr><h3 id="3-HTTP数据传输过程"><a href="#3-HTTP数据传输过程" class="headerlink" title="3. HTTP数据传输过程"></a>3. HTTP数据传输过程</h3><ul><li><p><strong>发送端</strong>发送数据时，数据会<strong>从上层传输到下层</strong>，且每经过一层都会被<strong>加上该层的头部信息</strong></p></li><li><p><strong>接收端</strong>接收数据时，数据会<strong>从下层传输到上层</strong>，且<strong>传输前</strong>会<strong>把下层的头部信息删除</strong></p></li><li><p>具体如下图所示：</p><img src="/2019/12/17/http%E7%B3%BB%E5%88%9701/TCP-IP%E6%95%B0%E6%8D%AE%E6%B5%81.png" class></li></ul><hr><h3 id="4-传输层——TCP的三次握手"><a href="#4-传输层——TCP的三次握手" class="headerlink" title="4. 传输层——TCP的三次握手"></a>4. 传输层——TCP的三次握手</h3><ul><li><p>使用TCP协议进行通信的双方<strong>必须先建立连接</strong>，然后才能开始传输数据</p></li><li><p>为了确保连接双方的可靠性，在双方建立连接时，TCP协议采用了<strong>三次握手</strong>策略：</p></li><li><p>如下图所示：</p><img src="/2019/12/17/http%E7%B3%BB%E5%88%9701/TCP%E7%9A%84%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B.png" class></li></ul><p>  （为什么要进行三次握手：为了确认客户端与服务端通信双方的接收能力与发送能力都是正常的，防止开启一些无用的连接）</p><ul><li><p>第一次握手：客户端发送带有SYN标志的连接请求报文段，然后进入SYN_SEND状态，等待服务端的确认</p><p>(服务端确认了自己可以接收数据)</p></li><li><p>第二次握手：服务端接收到客户端的SYN报文段后，需要发送ACK信息对这个SYN报文段进行确认。同时，还要发送自己的SYN请求信息。服务端会将上述信息放到一个报文段（SYN+ACK报文段）中，一并发送给客户端，此时服务器端将会进入SYN_RECV状态（创建连接，server开启tcp的socket的端口）</p><p>（客户端确认了自己可以发送和接收数据）</p></li><li><p>第三次握手：客户端接收到服务端的SYN+ACK报文段后，会向服务端发送ACK确认报文段，这个报文段发送完毕后，客户端和服务端都进入ESTABLISHED状态，完成TCP的三次握手</p><p>（服务端确认了自己可以发送数据）</p></li><li><p>如下图所示：</p><img src="/2019/12/17/http%E7%B3%BB%E5%88%9701/TCP%E7%9A%84%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B2.png" class></li></ul><hr><h3 id="4-DNS域名解析"><a href="#4-DNS域名解析" class="headerlink" title="4. DNS域名解析"></a>4. DNS域名解析</h3><ul><li><p>通常我们访问一个网站是通过主机名或域名来进行访问的。因为相对于IP地址，域名更容易让人记住</p></li><li><p>但TCP/IP协议使用的是IP地址进行访问的，所以必须有个机制或服务把域名转换成IP地址</p></li><li><p><strong>DNS</strong>服务就是用来解决这个问题的，它提供<strong>域名到IP地址之间的解析服务</strong></p><img src="/2019/12/17/http%E7%B3%BB%E5%88%9701/DNS%E6%9C%8D%E5%8A%A1%E5%99%A8.png" class></li></ul><ul><li>本地电脑会将我们经常使用的域名和其对应的IP地址建立一个<strong>映射关系</strong>，并保存到系统文件中。进行数据请求时，系统会优先到<strong>host文件</strong>中寻找是否缓存了对应域名的IP地址。如果本地没有缓存，则系统会求助于<strong>本地的DNS服务器</strong>，去请求域名对应的IP地址。如果本地的DNS服务器没有找到，则本地的DNS服务器首先会选择在<strong>TCP/IP参数中设置的首选DNS服务器</strong>（可能和本地DNS服务器相同）发送请求，然后<strong>一层一层</strong>的向上一级的DNS服务器发送请求（最多到<strong>DNS根服务器</strong>）（如果设置了转发的话）（如果没设置转发，就直接向13台根DNS服务器发送请求），直到找到所请求域名对应的IP地址。（返回IP地址时也是一层一层返回的）</li></ul><hr><h3 id="5-HTTP完整事务处理过程"><a href="#5-HTTP完整事务处理过程" class="headerlink" title="5. HTTP完整事务处理过程"></a>5. HTTP完整事务处理过程</h3><img src="/2019/12/17/http%E7%B3%BB%E5%88%9701/HTTP%E5%AE%8C%E6%95%B4%E4%BA%8B%E5%8A%A1%E5%A4%84%E7%90%86%E8%BF%87%E7%A8%8B.jpg" class>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Hello World</title>
+      <link href="/2019/12/17/hello-world/"/>
+      <url>/2019/12/17/hello-world/</url>
+      
+        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+  
+  
+</search>
